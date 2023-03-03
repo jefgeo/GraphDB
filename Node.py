@@ -8,19 +8,24 @@ class Node:
     def add_relationship(self, to_node):
         if to_node is not None:
             self.relationships.append(to_node)
+            to_node.relationships.append(self)
         else:
             raise ValueError(f'to_node not found')
 
-    def __str__(self):
+    def dump_node(self):
         return f'For node: {self.key} @ {hex(id(self))}' \
                f'\n\tnode_type={self.node_type}' \
                f'\n\tattributes={self.attributes}' \
                f'\n\trelationships={self.relationships}'
 
-    def list_relationships(self):
+    def __str__(self):
+        return f'{self.key}'
+
+    def get_relationships_string(self):
         relationship_list = []
         for relationship in self.relationships:
-            relationship_list.append(relationship.key)
+            if relationship != self.key:
+                relationship_list.append(relationship.key)
         return relationship_list
 
 class Nodes:

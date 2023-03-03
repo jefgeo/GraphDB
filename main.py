@@ -4,20 +4,23 @@ from Node import *
 def analyze_strengths():
 
     my_nodes = Nodes()
-#todo:  create different node types for people vs strengths
+
+    # Add People as nodes.
     people_list = ['Aishwarya', 'Brandon', 'Jeff', 'Vindhya', 'Kankshi', 'Himanshu', 'Ronit', 'Snehith', 'Josh',
                    'Krissy', 'Chad']
     for person in people_list:
-        my_nodes.add_node(Node(person))
+        my_nodes.add_node(Node(person, 'Person'))
 
+    # Add strengths as nodes.
     strengths_list = ['Achiever', 'Adaptability', 'Analytical', 'Arranger', 'Communication', 'Competition', 'Context',
                        'Deliberative', 'Discipline', 'Focus', 'Futuristic', 'Ideation', 'Individualization', 'Input',
                        'Intellection', 'Learner', 'Maximizer', 'Positivity', 'Relator', 'Responsibility',
                        'Restorative', 'Significance', 'Strategic']
     for strength in strengths_list:
-        my_nodes.add_node(Node(strength))
+        my_nodes.add_node(Node(strength, 'Strength'))
 
-    mapping = [
+    # add Relationships
+    relationships = [
         ['Aishwarya', 'Arranger'],
         ['Aishwarya', 'Positivity'],
         ['Aishwarya', 'Learner'],
@@ -75,16 +78,41 @@ def analyze_strengths():
         ['Jeff', 'Intellection']
     ]
 
-    print(mapping)
-    for item in mapping:
+    # print(relationships)
+    for item in relationships:
         my_nodes.get_node_by_key(item[0]).add_relationship(my_nodes.get_node_by_key(item[1]))
 
-    for strength in my_nodes:
-        print(strength)
 
-    print(my_nodes.get_node_by_key("Aishwarya").list_relationships())
+    for node in my_nodes:
+        # Person
+        if node.node_type == "Person":
+            print('\n\n')
+            linked_people = {}
+            print(node)
+            # Person's relationships (e.g. Strengths)
+            for relationship in node.get_relationships_string():
+                print(f'\t{relationship}')
+                common_people_this_relationship = 0
+                relationship_list = ''
+                # Other people connected to that Node (e.g. those with same strengths)
+                for relationship_2 in my_nodes.get_node_by_key(relationship).get_relationships_string():
+                    if relationship_2 != node.key:
+                        relationship_list += relationship_2 + ' '
+                        if relationship_2 not in linked_people:
+                            linked_people[relationship_2] = 1
+                        else:
+                            linked_people[relationship_2] += 1
+                        common_people_this_relationship += 1
+                if common_people_this_relationship == 0:
+                    print(f'\t\t**Unique Trait for You**')
+                else:
+                    print(f'\t\tTotal of {common_people_this_relationship} others:  {relationship_list}')
+            print('\n\tTotal Links')
+            linked_people_sorted = sorted(linked_people.items(), key = lambda x: -x[1])
+            for k,v in linked_people_sorted:
+                print(f'\t\t{k}: {v}')
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
     analyze_strengths()
 
