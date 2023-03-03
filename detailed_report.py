@@ -78,22 +78,45 @@ def analyze_strengths():
     ]
 
     for item in relationships:
+        # my_nodes.get_node_by_key(item[0]).add_relationship(my_nodes.get_node_by_key(item[1]))
         my_nodes.add_relationship_by_key(item[0], item[1])
 
     for node in my_nodes:
 
         # Person
         if node.get_node_type() == "Person":
+            linked_people = {}
             print(f'\n\n{node}')
 
             # Person's relationships (e.g. Strengths)
+            out_string = ''
             for relationship in node.get_relationships():
-                print(f'\n\t{relationship.get_key():18}')
+                out_string += f'\n\t{relationship.get_key():18}'
 
                 # Other people connected to that Node (e.g. those with same strengths)
+                common_people_this_relationship = 0
+                relationship_list = ''
+
                 for relationship_2 in relationship.get_relationships():
                     if relationship_2.get_key() != node.get_key():
-                        print(f'\t\t{relationship_2.get_key()}')
+                        relationship_list += relationship_2.get_key() + ', '
+                        if relationship_2.get_key() not in linked_people:
+                            linked_people[relationship_2.get_key()] = 1
+                        else:
+                            linked_people[relationship_2.get_key()] += 1
+                        common_people_this_relationship += 1
+                if common_people_this_relationship == 0:
+                    out_string += f'\t\t** Unique Trait for You **'
+                else:
+                    out_string += f'\t\t{common_people_this_relationship} others:  {relationship_list[:-2]}'
+            print(f'\t{out_string}')
+            print('\n\tTotal LInks to Others:')
+            linked_people_sorted = sorted(linked_people.items(), key=lambda x: -x[1])
+            for k, v in linked_people_sorted:
+                print(f'\t\t{k:10}\t{v}')
+
 
 if __name__ == '__main__':
     analyze_strengths()
+
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
