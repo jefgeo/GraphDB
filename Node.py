@@ -2,8 +2,8 @@ class Node:
     def __init__(self, key, node_type=None):
         self.key = key
         self.node_type = node_type
-        self.attributes = dict()
-        self.relationships = [Node]
+        self.attributes = {}
+        self.relationships = []
 
     def add_relationship(self, to_node):
         if to_node is not None:
@@ -18,8 +18,10 @@ class Node:
                f'\n\trelationships={self.relationships}'
 
     def list_relationships(self):
+        relationship_list = []
         for relationship in self.relationships:
-            return relationship
+            relationship_list.append(relationship.key)
+        return relationship_list
 
 class Nodes:
 
