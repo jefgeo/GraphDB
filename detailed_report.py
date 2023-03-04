@@ -1,5 +1,9 @@
 from graph import *
 
+'''
+This is a more detailed report to show the power of linking the relationships
+'''
+
 
 def analyze_strengths():
     my_nodes = Nodes()
