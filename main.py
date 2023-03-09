@@ -1,5 +1,9 @@
 from graph import *
 
+'''
+this version does a simple version of the report to show how easy the code can be
+'''
+
 
 def analyze_strengths():
     my_nodes = Nodes()
@@ -85,6 +89,7 @@ def analyze_strengths():
     for item in relationships:
         my_nodes.add_relationship_by_key(item[0], item[1])
 
+    # Create the report
     for node in my_nodes:
 
         # Person
@@ -99,6 +104,7 @@ def analyze_strengths():
                 for relationship_2 in relationship.get_relationships():
                     if relationship_2.get_key() != node.get_key():
                         print(f'\t\t{relationship_2.get_key()}')
+
 
 if __name__ == '__main__':
     analyze_strengths()
