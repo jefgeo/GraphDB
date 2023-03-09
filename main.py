@@ -5,13 +5,13 @@ def analyze_strengths():
     my_nodes = Nodes()
 
     # Add People as nodes.
-    people_list = ['Aishwarya', 'Brandon', 'Chad', 'Himanshu', 'Jeff', 'Josh', 'Kankshi', 'Krissy', 'Ronit', 'Snehith',
-                   'Vindhya']
+    people_list = ['Aishwarya', 'Brandon', 'Chad', 'Himanshu', 'Jeff', 'Josh', 'Kankshi', 'Krissy', 'Ronit',
+                   'Ruchita', 'Snehith', 'Vindhya']
     for person in people_list:
         my_nodes.add_node(Node(person, 'Person'))
 
     # Add strengths as nodes.
-    strengths_list = ['Achiever', 'Adaptability', 'Analytical', 'Arranger', 'Communication', 'Competition', 'Context',
+    strengths_list = ['Achiever', 'Adaptability', 'Analytical', 'Arranger', 'Communication', 'Competition', 'Connectedness', 'Context',
                       'Deliberative', 'Discipline', 'Focus', 'Futuristic', 'Ideation', 'Individualization', 'Input',
                       'Intellection', 'Learner', 'Maximizer', 'Positivity', 'Relator', 'Responsibility',
                       'Restorative', 'Significance', 'Strategic']
@@ -74,7 +74,12 @@ def analyze_strengths():
         ['Jeff', 'Individualization'],
         ['Jeff', 'Ideation'],
         ['Jeff', 'Relator'],
-        ['Jeff', 'Intellection']
+        ['Jeff', 'Intellection'],
+        ['Ruchita', 'Restorative'],
+        ['Ruchita', 'Connectedness'],
+        ['Ruchita', 'Individualization'],
+        ['Ruchita', 'Achiever'],
+        ['Ruchita', 'Responsibility']
     ]
 
     for item in relationships:

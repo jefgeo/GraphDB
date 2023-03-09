@@ -5,13 +5,14 @@ def analyze_strengths():
     my_nodes = Nodes()
 
     # Add People as nodes.
-    people_list = ['Aishwarya', 'Brandon', 'Chad', 'Himanshu', 'Jeff', 'Josh', 'Kankshi', 'Krissy', 'Ronit', 'Snehith',
-                   'Vindhya']
+    people_list = ['Aishwarya', 'Brandon', 'Chad', 'Himanshu', 'Jeff', 'Josh', 'Kankshi', 'Krissy', 'Ronit',
+                   'Ruchita', 'Snehith', 'Vindhya']
     for person in people_list:
         my_nodes.add_node(Node(person, 'Person'))
 
     # Add strengths as nodes.
-    strengths_list = ['Achiever', 'Adaptability', 'Analytical', 'Arranger', 'Communication', 'Competition', 'Context',
+    strengths_list = ['Achiever', 'Adaptability', 'Analytical', 'Arranger', 'Communication', 'Competition',
+                      'Connectedness', 'Context',
                       'Deliberative', 'Discipline', 'Focus', 'Futuristic', 'Ideation', 'Individualization', 'Input',
                       'Intellection', 'Learner', 'Maximizer', 'Positivity', 'Relator', 'Responsibility',
                       'Restorative', 'Significance', 'Strategic']
@@ -74,8 +75,14 @@ def analyze_strengths():
         ['Jeff', 'Individualization'],
         ['Jeff', 'Ideation'],
         ['Jeff', 'Relator'],
-        ['Jeff', 'Intellection']
+        ['Jeff', 'Intellection'],
+        ['Ruchita', 'Restorative'],
+        ['Ruchita', 'Connectedness'],
+        ['Ruchita', 'Individualization'],
+        ['Ruchita', 'Achiever'],
+        ['Ruchita', 'Responsibility']
     ]
+
 
     for item in relationships:
         # my_nodes.get_node_by_key(item[0]).add_relationship(my_nodes.get_node_by_key(item[1]))
@@ -89,6 +96,7 @@ def analyze_strengths():
             print(f'\n\n{node}')
 
             # Person's relationships (e.g. Strengths)
+            common_people_total = 0
             out_string = ''
             for relationship in node.get_relationships():
                 out_string += f'\n\t{relationship.get_key():18}'
@@ -109,11 +117,13 @@ def analyze_strengths():
                     out_string += f'\t\t** Unique Trait for You **'
                 else:
                     out_string += f'\t\t{common_people_this_relationship} others:  {relationship_list[:-2]}'
+                common_people_total += common_people_this_relationship
             print(f'\t{out_string}')
-            print('\n\tTotal LInks to Others:')
             linked_people_sorted = sorted(linked_people.items(), key=lambda x: -x[1])
+            print(f'\n\tTotal Links in Common: {common_people_total}')
             for k, v in linked_people_sorted:
                 print(f'\t\t{k:10}\t{v}')
+
 
 
 if __name__ == '__main__':
